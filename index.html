@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Styles with ReactJS</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- custom style sheets oveeride the bootstrap styles-->
+
+<body>
+
+<script type="text/babel">
+	
+	class App extends React.Component{
+
+		constructor(){
+			super();
+			this.state={
+				theme:'styles/style-default.css' //in production level this can be a remote CDN
+			}
+		}
+
+		_changeTheme(v){
+			switch(v){
+				case 1:this.setState({theme:'styles/style-default.css' });break;
+				case 2:this.setState({theme:'styles/style-red.css' });break;
+				case 3:this.setState({theme:'styles/style-blue.css' });break;
+			}
+		}
+
+		render(){
+			return(
+				<div className="container">
+				    <link rel="stylesheet" type="text/css" href={this.state.theme} />
+					<h1>Styles with ReactJS</h1>
+					<button className="btn btn-sm" onClick={this._changeTheme.bind(this,1)}>Default theme</button>
+					<button className="btn btn-sm" onClick={this._changeTheme.bind(this,2)}>Red theme</button>
+					<button className="btn btn-sm" onClick={this._changeTheme.bind(this,3)}>Blue theme</button>				
+				</div>
+			);
+		}
+	}
+
+	ReactDOM.render(<App/>,document.body);
+
+</script>
+
+
+</body>
+</html>
